@@ -6,6 +6,9 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
+// + Initializing a data on memory, then moving to the storage. 
+// + In Solidity 0.8.0 only array , struct and mapping type can specific data location. uint not on it
+
 contract Blog is Ownable {
     // This contract allows the owner to create and edit posts,
     // and for anyone to fetch posts
@@ -16,7 +19,7 @@ contract Blog is Ownable {
     
 
     constructor(string memory _name) {
-        console.log("Create a blog with name: ", _name);
+        console.log("[Backend] Create a blog with name: ", _name);
         name = _name;
     }
 
@@ -28,6 +31,7 @@ contract Blog is Ownable {
     // + using a Counter for postId
     // + using mapping to storage list posts
     // + Notable: Initializing a struct on memory, then moving to the storage
+    // + Cannot return data from an editable function on blockchain
     event PostCreated(uint id, string title);
     mapping(uint => Post) postList;
 
@@ -38,19 +42,40 @@ contract Blog is Ownable {
         bool published;
     }
 
-    function createPost(string memory _title, string memory _hash) public onlyOwner 
-        returns (uint _id) {
+    function createPost(string memory _title, string memory _hash) public onlyOwner {
 
         _postId.increment();
-        _id = _postId.current();
+        uint _id = _postId.current();
 
         // Must create the struct on MEMORY, because you initialized a POINTER.
         // If wanna store it on the blockchain, then assigned it to a mapping
         // ref: https://ethereum.stackexchange.com/questions/4467/initialising-structs-to-storage-variables
-        Post memory newPost = Post(_id, _title, _hash, true);
-        postList[_id] = newPost;
+        Post memory newPost;
+        newPost.id = _id;
+        newPost.title = _title;
+        newPost.hash = _hash;
+        newPost.published = true;
 
+        postList[_id] = newPost;
         emit PostCreated(_id, _title);
     }
 
+    // 3. Get a post by id and fetch all
+    // + In Solidity 0.8.0 only array , struct and mapping type can specific data location. uint not on it
+    function getPostById(uint _id) public view returns(Post memory) {
+        return postList[_id];
+    }
+
+    function getAllPosts() public view returns (Post[] memory) {
+        uint lastestId = _postId.current();
+        Post[] memory results = new Post[](lastestId);
+
+        for (uint idx=0; idx < lastestId; idx ++){
+            Post storage currentPost = postList[idx + 1];
+            results[idx] = currentPost;
+        }
+
+        console.log("[Backend] Calling getAllPost function: total ", lastestId, " posts" );
+        return results;
+    }
 }

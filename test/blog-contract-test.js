@@ -8,6 +8,10 @@ describe("Blog", async function() {
         await blogInstance.deployed();
 
         const id = await blogInstance.createPost("This is a title", "111111");
-        expect(id).to.exist;
+
+        // testing get all posts
+        const postList = await blogInstance.getAllPosts();
+        expect(postList[0].title).to.equal("This is a title");
     })
+
 })
