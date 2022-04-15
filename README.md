@@ -47,16 +47,16 @@
 
 ### Notable
 
-💡 **Why cannot assign a memory data to store data or store data to memory data**
+💡 **Why cannot assign a memory data to store data or store data to memory data**  
 Must create a data on MEMORY, because you initialized a POINTER.  
 If you wanna store it on the blockchain, then assigned it to a mapping  
 ref: [https://ethereum.stackexchange.com/questions/4467/initialising-structs-to-storage-variables](https://ethereum.stackexchange.com/questions/4467/initialising-structs-to-storage-variables)  
 
 
-💡 **Define the unit variable then don’t need specific data location**
+💡 **Define the unit variable then don’t need specific data location**  
 In Solidity 0.8.0 only array, struct, and mapping type can specific data location. uint not on it  
 
-💡 **Why cannot get a value which returns a solidity function?**
+💡 **Why cannot get a value which returns a solidity function?**  
 A function without a `pure` modifier, a `view` modifier or a `constant` modifier is assumed to be changing the contents of the blockchain.  
 The actual value that you return from the function can be used **only inside the block-chain**  
 If you want this value to be accessible on the off-chain side, then you need to generate an `event`  
