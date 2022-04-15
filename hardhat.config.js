@@ -18,4 +18,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: "0.8.4",
+
+  networks: {
+    hardhat: {
+      chain: 1337
+    }
+    // mumbai: { // testnet
+    //   url: "https://rpc-mumbai.matic.today",
+    //   accounts: [process.env.pk]
+    // },
+    // polygon: { // mainnet
+    //   url: "https://polygon-rpc.com/",
+    //   accounts: [process.env.pk]
+    // }
+  }
 };
