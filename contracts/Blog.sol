@@ -92,4 +92,16 @@ contract Blog is Ownable {
 
         emit PostUpdated(_id, true);
     }
+
+    // 5. Updates the blog name
+    event BlogNameUpdated(string name);
+
+    function updateBlogName(string memory _name) public onlyOwner {
+        console.log("[Backend] Call updateBlogName() with a new name: ", _name);
+        require(bytes(_name).length > 0, "A name cannot empty");
+        require(bytes(_name).length <= 100, "Maximum length of name is 100 characters");
+
+        name = _name;
+        emit BlogNameUpdated(_name);
+    }
 }

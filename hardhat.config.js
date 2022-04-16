@@ -21,7 +21,7 @@ module.exports = {
 
   networks: {
     hardhat: {
-      chain: 1337
+      chain: 31337
     }
     // mumbai: { // testnet
     //   url: "https://rpc-mumbai.matic.today",

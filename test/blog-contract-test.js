@@ -21,7 +21,7 @@ describe("Blog", async function() {
         expect(postList[0].title).to.equal("This is a title");
     }),
 
-    it('Should edit a post', async function() {
+    xit('Should edit a post', async function() {
         const blogContract = await ethers.getContractFactory('Blog');
         const blogInstance = await blogContract.deploy("Hello world");
         await blogInstance.deployed();
@@ -32,6 +32,17 @@ describe("Blog", async function() {
 
         const post = await blogInstance.getPostById(1);
         expect(post.hash).to.equal("222222");
+    }),
+
+    it('Should change name of blog', async function() {
+        const blogContract = await ethers.getContractFactory('Blog');
+        const blogInstance = await blogContract.deploy("Hello world");
+        await blogInstance.deployed();
+
+        await blogInstance.updateBlogName("Web3 Blog with Solidity");
+        var name = await blogInstance.name.call();
+
+        expect(name).to.equal("Web3 Blog with Solidity");
     })
 
 })
