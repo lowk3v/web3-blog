@@ -23,11 +23,11 @@ module.exports = {
     hardhat: {
       chain: 31337
     }
-    // mumbai: { // testnet
-    //   url: "https://rpc-mumbai.matic.today",
-    //   accounts: [process.env.pk]
-    // },
-    // polygon: { // mainnet
+    ,mumbai: { // testnet
+      url: "https://rpc-mumbai.matic.today",
+      accounts: [process.env.pk]
+    }
+    // ,polygon: { // mainnet
     //   url: "https://polygon-rpc.com/",
     //   accounts: [process.env.pk]
     // }

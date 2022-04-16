@@ -9,7 +9,6 @@ Guideline: https://dev.to/edge-and-node/the-complete-guide-to-full-stack-web3-de
 - Front end framework - `Next.js & React`
 - Ethereum web client library - `Ethers.js`
 - File storage - `IPFS`
-- Indexing and querying - `The Graph Protocol`
 
 ---
 
@@ -52,10 +51,31 @@ Guideline: https://dev.to/edge-and-node/the-complete-guide-to-full-stack-web3-de
 - CLI: `npx hardhat test`
 
 6. **Deploy**
+- Add hardhat test network  
+```
+Network Name: Hardhat node
+New RPC URL: http://127.0.0.1:8545
+Chain ID: 31337
+Currency Symbol: ETH
+```
 - Adding script/deploy.js  
 - For run local node and get 20 accounts: `npx hardhat node`
-- CLI: `npx hardhat run scripts/deploy.js --network localhost`  
+- Compile the contract: `npx hardhat run scripts/deploy.js --network localhost`  
+- Run frontend on develop enviroment: `npm run dev`  
+- Frontend production build: `npm run build` and run server `npm start`
 
+7. **Deploy on Polygon**
+- Deploying mumbai testnet
+- Get Matic on faucet: https://faucet.polygon.technology/
+- Add mumbai testnet:  
+```
+Network Name: Mumbai TestNet
+New RPC URL: https://rpc-mumbai.matic.today
+Chain ID: 80001
+Currency Symbol: Matic
+```
+- Export private of owner wallet to system environment and re-config, add more mumbai network in hardhat.config.js
+- Compile the contract: `npx hardhat run scripts/deploy.js --network mumbai`
 
 ---
 
