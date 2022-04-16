@@ -8,8 +8,8 @@ async function main() {
 
   console.log("The contract deployed at address: ", BlogIns.address);
   fs.writeFileSync('./config.js', `
-export const contractAddress = ${BlogIns.address};
-export const ownerAddress = ${BlogIns.signer.address};
+export const contractAddress = "${BlogIns.address}";
+export const ownerAddress = "${BlogIns.signer.address}";
   `)
 }
 

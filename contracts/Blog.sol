@@ -34,6 +34,7 @@ contract Blog is Ownable {
     // + Cannot return data from an editable function on blockchain
     event PostCreated(uint id, string title);
     mapping(uint => Post) postList;
+    mapping(string => Post) hashToPost;
 
     struct Post {
         uint id;
@@ -57,13 +58,16 @@ contract Blog is Ownable {
         newPost.published = true;
 
         postList[_id] = newPost;
+
+        hashToPost[_hash] = newPost;
+
         emit PostCreated(_id, _title);
     }
 
     // 3. Get a post by id and fetch all
     // + In Solidity 0.8.0 only array , struct and mapping type can specific data location. uint not on it
-    function getPostById(uint _id) public view returns(Post memory) {
-        return postList[_id];
+    function getPostByHash(string memory _hash) public view returns(Post memory) {
+        return hashToPost[_hash];
     }
 
     function getAllPosts() public view returns (Post[] memory) {
@@ -89,6 +93,8 @@ contract Blog is Ownable {
         postList[_id].title = _title;
         postList[_id].hash = _hash;
         postList[_id].published = _isPublish;
+
+        hashToPost[_hash] = postList[_id];
 
         emit PostUpdated(_id, true);
     }

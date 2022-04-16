@@ -45,11 +45,13 @@ Guideline: https://dev.to/edge-and-node/the-complete-guide-to-full-stack-web3-de
 3. **Get a post, get all posts**
 - In Solidity 0.8.0 only array , struct and mapping type can specific data location. uint not on it  
 
-4. **Testing**  
+4. **Change blog name, Edit an exists blog**  
+
+5. **Testing**  
 - Adding test/blog-contract.js  
 - CLI: `npx hardhat test`
 
-5. **Deploy**
+6. **Deploy**
 - Adding script/deploy.js  
 - For run local node and get 20 accounts: `npx hardhat node`
 - CLI: `npx hardhat run scripts/deploy.js --network localhost`  
