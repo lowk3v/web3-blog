@@ -78,4 +78,18 @@ contract Blog is Ownable {
         console.log("[Backend] Calling getAllPost function: total ", lastestId, " posts" );
         return results;
     }
+
+    // 4. Updates an existing post
+    event PostUpdated(uint id, bool isSuccess);
+
+    function updatePostById(uint _id, string memory _title, string memory _hash, bool _isPublish) public onlyOwner {
+        console.log("[Backend] Call updatePostById() with id=", _id);
+        require(_id <= _postId.current(), "The post not exist");
+
+        postList[_id].title = _title;
+        postList[_id].hash = _hash;
+        postList[_id].published = _isPublish;
+
+        emit PostUpdated(_id, true);
+    }
 }

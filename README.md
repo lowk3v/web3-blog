@@ -1,5 +1,7 @@
 # Web3 Blog project
 
+Guideline: https://dev.to/edge-and-node/the-complete-guide-to-full-stack-web3-development-4g74
+
 ### Frameworks
 
 - Blockchain - `Polygon` (with optional RPC provider)
